@@ -8,7 +8,7 @@ class Locators:
     INGREDIENT = (By.XPATH, "//img[@alt='Флюоресцентная булка R2-D3']")
     INGREDIENT_COUNTER = (
         By.XPATH,
-        "//div[contains(@class,'BurgerIngredient')]"
+        "//a[contains(@class,'BurgerIngredient_ingredient')]"
         "[.//img[@alt='Флюоресцентная булка R2-D3']]"
         "//p[contains(@class,'counter')]",
     )
@@ -38,6 +38,7 @@ class Locators:
     
     INGREDIENT_CARD = (
         By.XPATH,
-        "//div[contains(@class,'BurgerIngredient')]"
+        "//a[contains(@class,'BurgerIngredient_ingredient')]"
         "[.//img[@alt='Флюоресцентная булка R2-D3']]",
     )
+    

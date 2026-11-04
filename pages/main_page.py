@@ -1,9 +1,4 @@
 import allure
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from seletools.actions import drag_and_drop as drag_and_drop_action
-
 
 from locators.locators import Locators
 from pages.base_page import BasePage
@@ -32,19 +27,14 @@ class MainPage(BasePage):
 
     @allure.step("Проверяем, что модальное окно ингредиента закрылось")
     def is_ingredient_modal_closed(self):
-        return self.wait.until(
-            EC.invisibility_of_element_located(Locators.INGREDIENT_MODAL_HEADER)
-        )
+        return self.wait_for_invisible(Locators.INGREDIENT_MODAL_HEADER)
 
     @allure.step("Перетаскиваем булку в конструктор")
     def add_ingredient_to_burger(self):
-        """Добавляет ингредиент в конструктор перетаскиванием.
-        Selenium не порождает HTML5 drag-события, поэтому
-        используется seletools. Булка кладётся в оба слоя,
-        поэтому счётчик становится 2."""
+        """Булка кладётся в оба слоя, поэтому счётчик становится 2."""
         card = self.find(Locators.INGREDIENT_CARD)
         target = self.find(Locators.CONSTRUCTOR_AREA)
-        drag_and_drop_action(self.driver, card, target)
+        self.drag_and_drop(card, target)
 
     @allure.step("Получаем значение счётчика булки")
     def get_ingredient_counter_value(self):
