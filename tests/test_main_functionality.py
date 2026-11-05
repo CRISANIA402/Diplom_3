@@ -16,9 +16,13 @@ def main_page(driver):
 class TestMainFunctionality:
     @allure.title("Переход по клику на «Конструктор»")
     def test_navigate_to_constructor(self, main_page):
+        main_page.click_order_feed()
+        main_page.wait_for_url(FEED_URL)
+        assert main_page.get_current_url() == FEED_URL
         main_page.click_constructor()
         main_page.wait_for_url(BASE_URL)
         assert main_page.get_current_url() == BASE_URL
+
 
     @allure.title("Переход по клику на «Лента заказов»")
     def test_navigate_to_order_feed(self, main_page):
